@@ -11,7 +11,7 @@ function views_rss_itunes_field_formatter_info() {
     ),
     'itunes:image' => array(
       'label' => t('RSS <itunes:image> element'),
-      'field types' => array('image'),
+      'field types' => array('image', 'file'),
     ),
   );
   return $formatters;
