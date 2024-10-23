@@ -3,5 +3,6 @@ description = "Provides iTunes element set for Views RSS module"
 package = Views
 dependencies[] = views_rss
 dependencies[] = views_rss_core
+dependencies[] = getid3
 backdrop = 1.x
 type = module
