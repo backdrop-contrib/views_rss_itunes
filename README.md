@@ -9,8 +9,8 @@ Requirements <!-- Do not include this section if there are no requirements. -->
 
 This module requires that the following modules are also enabled:
 
- * [Bar](https://github.com/backdrop-contrib/views_rss)
- * [Baz](https://github.com/backdrop-contrib/getid3)
+ * [Views RSS](https://github.com/backdrop-contrib/views_rss)
+ * [getID3](https://github.com/backdrop-contrib/getid3)
 
 Installation <!-- This section is required. -->
 ------------
