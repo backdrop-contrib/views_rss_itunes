@@ -18,7 +18,7 @@ function views_rss_itunes_preprocess_channel_category(&$variables) {
     // Load term object.
     $term = taxonomy_term_load($tid);
     // Try to load parent term objects.
-    $parents = taxonomy_get_parents($tid);
+    $parents = taxonomy_term_load_parents($tid);
     // Term has a parent.
     if (count($parents)) {
       $parent = array_shift($parents);
@@ -97,19 +97,19 @@ function views_rss_itunes_get_file_info($uri, $rebuild = FALSE) {
     $file_info = $cached->data;
   }
   else {
-    $file_info = getid3_analyze(drupal_realpath($uri));
+    $file_info = getid3_analyze(backdrop_realpath($uri));
     cache_set($cid, $file_info, 'cache_views');
   }
   return $file_info;
 }
 
 /**
- * Returns array of iTunes categories for channel <itunes:category> 
+ * Returns array of iTunes categories for channel <itunes:category>
  * element configuration in view options form.
  */
 function views_rss_itunes_get_category_options() {
   $options = array();
-  $vid = variable_get('views_rss_itunes_category_vid');
+  $vid = config_get('views_rss_itunes.settings', 'views_rss_itunes_category_vid');
   if (!empty($vid)) {
     foreach (taxonomy_get_tree($vid) as $term) {
       $options[$term->tid] = str_pad(t($term->name), strlen(t($term->name)) + $term->depth * 2, '- ', STR_PAD_LEFT);
