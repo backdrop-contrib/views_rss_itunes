@@ -11,7 +11,7 @@ function views_rss_itunes_field_formatter_info() {
     ),
     'itunes:image' => array(
       'label' => t('RSS <itunes:image> element'),
-      'field types' => array('image', 'file'),
+      'field types' => array('image'),
     ),
   );
   return $formatters;
@@ -80,9 +80,9 @@ function views_rss_itunes_field_formatter_settings_summary($field, $instance, $v
  */
 function views_rss_itunes_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
-  
+
   foreach ($items as $delta => $item) {
-    
+
     // Inside a view item may contain NULL data. In that case, just return.
     if (empty($item['fid'])) {
       unset($items[$delta]);
@@ -109,7 +109,7 @@ function views_rss_itunes_field_formatter_view($entity_type, $entity, $field, $i
           $uri = image_style_url($display['settings']['image_style'], $item['uri']);
           // Make sure that image style file has already been created.
           $path = image_style_path($display['settings']['image_style'], $item['uri']);
-          if (!file_exists(drupal_realpath($path))) {
+          if (!file_exists(backdrop_realpath($path))) {
             image_style_create_derivative($image_style, $item['uri'], $path);
           }
         }
@@ -128,6 +128,6 @@ function views_rss_itunes_field_formatter_view($entity_type, $entity, $field, $i
     );
 
   }
-  
+
   return $element;
 }
