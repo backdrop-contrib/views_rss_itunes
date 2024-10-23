@@ -13,13 +13,13 @@ function views_rss_itunes_install() {
   // Make sure that "iTunes Category" vocabulary does not exist
   // (it could still be there from previous module installations).
   $exists = FALSE;
-  $vocabularies = taxonomy_get_vocabularies();
-  foreach ($vocabularies as $vocabulary) {
-    if ($vocabulary->machine_name == 'views_rss_itunes_category') {
-      config_set('views_rss_itunes.settings', 'views_rss_itunes_category_vid', $vocabulary->vid);
-      $exists = TRUE;
-    }
-  }
+  // $vocabularies = taxonomy_get_vocabularies();
+  // foreach ($vocabularies as $vocabulary) {
+  //   if ($vocabulary->machine_name == 'views_rss_itunes_category') {
+  //     config_set('views_rss_itunes.settings', 'views_rss_itunes_category_vid', $vocabulary->vid);
+  //     $exists = TRUE;
+  //   }
+  // }
   if ($exists === FALSE) {
 
     // Create "iTunes Category" vocabulary.
@@ -29,7 +29,7 @@ function views_rss_itunes_install() {
       'module' => 'views_rss_itunes',
     ));
     $ret = taxonomy_vocabulary_save($vocabulary);
-    config_set('views_rss_itunes.settings', 'views_rss_itunes_category_vid', $vocabulary->vid);
+    // config_set('views_rss_itunes.settings', 'views_rss_itunes_category_vid', $vocabulary->vid);
 
     // Create main iTunes categories as first-level terms.
     $first_level_terms = array(
@@ -204,7 +204,7 @@ function views_rss_itunes_uninstall() {
   if (db_table_exists('cache_views')) {
     cache_clear_all('views_rss:', 'cache_views', TRUE);
   }
-  config_clear('views_rss_itunes.settings', 'views_rss_itunes_category_vid');
+  // config_clear('views_rss_itunes.settings', 'views_rss_itunes_category_vid');
   backdrop_set_message(t('Please note that taxonomy vocabulary "iTunes Category" has not been deleted, as it could still be used by site\'s content. If you don\'t need it anymore, please <a href="!taxonomy_url">delete it manually</a>.', array(
     '!taxonomy_url' => url('admin/structure/taxonomy/views_rss_itunes_category/edit'),
   )));
@@ -213,10 +213,10 @@ function views_rss_itunes_uninstall() {
 /**
  * Migrate views_rss_itunes variables to config.
  */
-function views_rss_itunes_update_1000() {
-  $config = config('views_rss_itunes.settings');
-  $config->set('views_rss_itunes_category_vid', update_variable_get('views_rss_itunes_category_vid', ''));
-  $config->save();
+// function views_rss_itunes_update_1000() {
+//   $config = config('views_rss_itunes.settings');
+//   $config->set('views_rss_itunes_category_vid', update_variable_get('views_rss_itunes_category_vid', ''));
+//   $config->save();
 
-  update_variable_del('views_rss_itunes_category_vid');
-}
+//   update_variable_del('views_rss_itunes_category_vid');
+// }

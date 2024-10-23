@@ -109,11 +109,11 @@ function views_rss_itunes_get_file_info($uri, $rebuild = FALSE) {
  */
 function views_rss_itunes_get_category_options() {
   $options = array();
-  $vid = config_get('views_rss_itunes.settings', 'views_rss_itunes_category_vid');
-  if (!empty($vid)) {
-    foreach (taxonomy_get_tree($vid) as $term) {
+  // $vid = config_get('views_rss_itunes.settings', 'views_rss_itunes_category_vid');
+  // if (!empty($vid)) {
+    foreach (taxonomy_get_tree('views_rss_itunes_category') as $term) {
       $options[$term->tid] = str_pad(t($term->name), strlen(t($term->name)) + $term->depth * 2, '- ', STR_PAD_LEFT);
     }
-  }
+  // }
   return $options;
 }
